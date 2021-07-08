@@ -1,0 +1,15 @@
+asgiref==3.3.4
+click==8.0.1
+fastapi==0.65.2
+h11==0.12.0
+importlib-metadata==4.5.0
+motor==2.4.0
+pydantic==1.8.2
+pymongo==3.11.4
+python-dotenv==0.17.1
+starlette==0.14.2
+starlette-context==0.3.2
+typing-extensions==3.10.0.0
+uvicorn==0.14.0
+zipp==3.4.1
+odmantic~=0.3.5
