@@ -24,7 +24,7 @@ if not MONGODB_URL:
     MONGO_PORT = int(os.getenv("MONGO_PORT", 27017))
     # MONGO_USER = os.getenv("MONGO_USER", "admin")
     # MONGO_PASS = os.getenv("MONGO_PASSWORD", "markqiu")
-    MONGO_DB = os.getenv("MONGO_DB", "aoao-lite")
+    MONGO_DB = os.getenv("MONGO_DB", "flash-cards")
 
     # MONGODB_URL = DatabaseURL(
     #     f"mongodb://{MONGO_USER}:{MONGO_PASS}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
@@ -35,6 +35,6 @@ if not MONGODB_URL:
 else:
     MONGODB_URL = DatabaseURL(MONGODB_URL)
 
-database_name = os.getenv("MONGO_DB", "aoao-lite")
+database_name = os.getenv("MONGO_DB", "flash-cards")
 
 courier_collection_name = "courier"
