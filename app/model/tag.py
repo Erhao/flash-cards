@@ -11,7 +11,7 @@ class Tag(Model, BaseMongoModel):
     """
     标签
     """
-    id: int = Field(primary_field=True, description="id",)
+    id: int = Field(primary_field=True, description="id")
     name: str = Field(description="标签名")
     updated_at: datetime = Field(default=datetime.utcnow())
     created_at: datetime = Field(default=datetime.utcnow())
