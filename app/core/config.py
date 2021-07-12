@@ -4,12 +4,13 @@ from dotenv import load_dotenv
 from starlette.datastructures import CommaSeparatedStrings, Secret
 from databases import DatabaseURL
 
+
+load_dotenv(".env")
+
 API_PREFIX_V1 = "/api"
 
 JWT_TOKEN_PREFIX = "Token"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # one week
-
-load_dotenv(".env")
 
 MAX_CONNECTIONS_COUNT = int(os.getenv("MAX_CONNECTIONS_COUNT", 10))
 MIN_CONNECTIONS_COUNT = int(os.getenv("MIN_CONNECTIONS_COUNT", 10))
@@ -34,6 +35,7 @@ if not MONGODB_URL:
     )
 else:
     MONGODB_URL = DatabaseURL(MONGODB_URL)
+
 
 database_name = os.getenv("MONGO_DB", "flash-cards")
 

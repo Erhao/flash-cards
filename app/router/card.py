@@ -6,6 +6,7 @@ from odmantic import AIOEngine, ObjectId
 from app.db.mongodb import AsyncIOMotorClient, get_database, get_aio_engine
 from app.core.config import database_name
 from app.model.card import FlashCard
+from app.model.tag import Tag
 
 
 router = APIRouter()
@@ -27,23 +28,23 @@ async def test(db: AsyncIOMotorClient = Depends(get_database)):
 
 
 @router.get("/test_odmantic")
-async def test_odmantic(engine: AIOEngine = Depends(get_aio_engine)):
+async def test_odmantic():
     """
     测试
     :return:
     """
     # print('-----------------------------------0')
     # # card = await engine.find_one(FlashCard, {"tag": 10})
-    card: FlashCard = await FlashCard.find_one({"tag": 10})
-    print('-------------------------card', card)
-    print(card.front_content)
-    print(card)  # Cursor
-    print('-----------------------------------1')
-    doc = {
-        "back_content": "new content2"
-    }
-    res = await card.update(doc)
-    print('-------------------------res', res)
+    # card: FlashCard = await FlashCard.find_one({"tag": 10})
+    # print('-------------------------card', card)
+    # print(card.front_content)
+    # print(card)  # Cursor
+    # print('-----------------------------------1')
+    # doc = {
+    #     "back_content": "new content2"
+    # }
+    # res = await card.update(doc)
+    # print('-------------------------res', res)
 
     # cards: List[FlashCard] = await FlashCard.find({"tag": 10})
     # print('-----------------cards', cards)
@@ -58,6 +59,13 @@ async def test_odmantic(engine: AIOEngine = Depends(get_aio_engine)):
     # )
     # print('-------------------------new_card', new_card)
     # await engine.save(new_card)
+
+    # tag = Tag(
+    #     id=10,
+    #     name="test"
+    # )
+    # print('------------tag', tag)
+    # await tag.save()
     return {"ok": 1}
 
 
