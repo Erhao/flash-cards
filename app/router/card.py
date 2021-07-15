@@ -60,12 +60,12 @@ async def test_odmantic():
     # print('-------------------------new_card', new_card)
     # await engine.save(new_card)
 
-    # tag = Tag(
-    #     id=10,
-    #     name="test"
-    # )
-    # print('------------tag', tag)
-    # await tag.save()
+    tag = Tag(
+        id=12,
+        name="test"
+    )
+    print('------------tag', tag)
+    await tag.save()
     return {"ok": 1}
 
 
