@@ -25,7 +25,9 @@ async def wx_register(req: WxRegisterReq):
     微信小程序code换session
     :return:
     """
-    # GET https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
     code = req.code
-    # res
+    url = f"https://api.weixin.qq.com/sns/jscode2session?appid={wx_app_id}&secret={wx_app_secret}&js_code={req.code}&" \
+          f"grant_type=authorization_code"
+    res = requests.get(url)
+    print(res)
 
