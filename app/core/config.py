@@ -7,6 +7,9 @@ from databases import DatabaseURL
 
 load_dotenv(".env")
 
+SERVER_HOST = os.getenv("SERVER_HOST")
+SERVER_PORT = int(os.getenv("SERVER_PORT"))
+
 API_PREFIX_V1 = "/api"
 
 JWT_TOKEN_PREFIX = "Token"
