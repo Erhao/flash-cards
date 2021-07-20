@@ -7,6 +7,7 @@ from app.db.mongodb import AsyncIOMotorClient, get_database, get_aio_engine
 from app.core.config import database_name, wx_app_id, wx_app_secret
 from app.model.user import User
 from app.model.tag import Tag
+from app.service.user import user_serv
 
 
 router = APIRouter()
@@ -27,6 +28,10 @@ async def wx_register(req: WxRegisterReq):
     """
     url = f"https://api.weixin.qq.com/sns/jscode2session?appid={wx_app_id}&secret={wx_app_secret}&js_code={req.code}&" \
           f"grant_type=authorization_code"
-    res = requests.get(url)
+    resp = requests.get(url)
+    resp_data = resp.json()  # {'session_key': 'JJP5l97e8Z99I20eijcf6g==', 'openid': 'oeoUQ47KqeSjEfjH6Ajz0uNqv8wI'}
+    openid = resp_data['openid']
+    res = await user_serv.wx_register(openid)
     print(res)
+    return res
 
