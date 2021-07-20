@@ -14,7 +14,7 @@ class User(Model, BaseMongoModel):
     openid: Optional[str] = Field(description="openid")
     mobile: Optional[str] = Field(description="电话")
     name: Optional[str] = Field(description="姓名")
-    gender: str = Field(default=UNKNOWN, description="性别")
+    gender: int = Field(default=UNKNOWN, description="性别")
     is_del: int = Field(default=0, description="是否删除")
     updated_at: datetime = Field(default=datetime.utcnow())
     created_at: datetime = Field(default=datetime.utcnow())
