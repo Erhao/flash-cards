@@ -18,5 +18,5 @@ app.add_middleware(
 app.add_event_handler("startup", connect_to_mongo)
 app.add_event_handler("shutdown", close_mongo_connection)
 
-app.include_router(card_router, prefix=API_PREFIX_V1)
+app.include_router(card_router, prefix=API_PREFIX_V1 + '/card')
 app.include_router(user_router, prefix=API_PREFIX_V1)

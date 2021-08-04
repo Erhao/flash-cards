@@ -1,3 +1,4 @@
+from odmantic import ObjectId
 from typing import Dict
 from odmantic import Model
 
@@ -14,6 +15,12 @@ class BaseMongoModel(Model):
     async def find_one(cls, spec):
         engine = await get_aio_engine()
         return await engine.find_one(cls, spec)
+
+    @classmethod
+    async def get_from_oid(cls, _id):
+        engine = await get_aio_engine()
+        spec = {"_id": ObjectId.validate(_id)}
+        return await engine.find_one(spec)
 
     @classmethod
     async def find(cls, spec):

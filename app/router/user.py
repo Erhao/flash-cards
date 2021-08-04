@@ -8,6 +8,7 @@ from app.core.config import database_name, wx_app_id, wx_app_secret
 from app.model.user import User
 from app.model.tag import Tag
 from app.service.user import user_serv
+from app.core.jwt import create_access_token
 
 
 router = APIRouter()
@@ -30,8 +31,20 @@ async def wx_register(req: WxRegisterReq):
           f"grant_type=authorization_code"
     resp = requests.get(url)
     resp_data = resp.json()  # {'session_key': 'JJP5l97e8Z99I20eijcf6g==', 'openid': 'oeoUQ47KqeSjEfjH6Ajz0uNqv8wI'}
+    print('-------------------resp_data', resp_data)
     openid = resp_data['openid']
-    res = await user_serv.wx_register(openid)
-    print(res)
+    user: User = await user_serv.wx_register(openid)
+    print(user)  # id=ObjectId('60f691519885b5f2430481a1') openid='oeoUQ47KqeSjEfjH6Ajz0uNqv8wI' mobile=None name=None gender=3 is_del=0 updated_at=datetime.datetime(2021, 7, 20, 9, 2, 58, 116000) created_at=datetime.datetime(2021, 7, 20, 9, 2, 58, 116000)
+    if not user:
+        # TODO: return error
+        pass
+    token_data = {
+        "id": str(user.id),
+        "openid": user.openid
+    }
+    token = create_access_token(data=token_data)
+    res = {
+        "token": token,
+    }
     return res
 

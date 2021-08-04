@@ -12,9 +12,9 @@ class UserServ:
         :param openid:
         :return:
         """
-        is_exist = await User.find_one({"openid": openid})
-        if is_exist:
-            return {}
+        user = await User.find_one({"openid": openid})
+        if user:
+            return user
 
         user = User(openid=openid)
         return await user.save()
