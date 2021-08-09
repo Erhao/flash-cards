@@ -20,7 +20,7 @@ class BaseMongoModel(Model):
     async def get_from_oid(cls, _id):
         engine = await get_aio_engine()
         spec = {"_id": ObjectId.validate(_id)}
-        return await engine.find_one(spec)
+        return await engine.find_one(cls, spec)
 
     @classmethod
     async def find(cls, spec):
