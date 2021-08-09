@@ -9,6 +9,7 @@ from app.core.config import database_name
 from app.model.card import FlashCard
 from app.model.tag import Tag
 from app.service.card import flashcard_serv
+from app.core.jwt import get_current_user
 
 
 router = APIRouter()
@@ -86,7 +87,11 @@ async def get():
     return
 
 @router.post("/upsert")
-async def upsert(req: UpsertReq):
+async def upsert(
+        req: UpsertReq,
+        user=Depends(get_current_user)
+):
+    print('------------user', user)
     # 创建
     if not req.id:
         docs = dict()
