@@ -43,7 +43,7 @@ def _parse_token(
 async def get_current_user(
     token_data: dict = Depends(_parse_token)
 ) -> User:
-    uid = token_data.get('id')
+    uid = token_data.get('uid')
     user = await User.get_from_oid(uid)
     if not user:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="User not found")
