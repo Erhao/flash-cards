@@ -18,7 +18,7 @@ class FlashCard(Model, BaseMongoModel):
     tag: Optional[int] = Field(description="标签")
     type: int = Field(default=FLASH_CARD_KNOWLEDGE, description="类型")
     is_private: int = Field(default=1, description="是否私有")
-    # creator: ObjectId = Field(description="创建者")
+    creator: ObjectId = Field(description="创建者")
     is_del: int = Field(default=0, description="是否删除")
     updated_at: datetime = Field(default=datetime.utcnow())
     created_at: datetime = Field(default=datetime.utcnow())

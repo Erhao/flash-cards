@@ -95,6 +95,7 @@ async def upsert(
     # 创建
     if not req.id:
         docs = dict()
+        docs['creator'] = user.id
         if req.front_text:
             docs['front_content'] = req.front_text
         if req.back_text:
