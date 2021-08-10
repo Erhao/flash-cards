@@ -6,9 +6,11 @@ from pydantic import BaseModel
 from app.db.mongodb import AsyncIOMotorClient, get_database, get_aio_engine
 from app.core.config import database_name, wx_app_id, wx_app_secret
 from app.model.user import User
+from app.model.card import FlashCard
 from app.model.tag import Tag
 from app.service.user import user_serv
-from app.core.jwt import create_access_token
+from app.core.jwt import create_access_token, get_current_user
+from app.router.base import ReqMeta
 
 
 router = APIRouter()
@@ -47,3 +49,21 @@ async def wx_register(req: WxRegisterReq):
     }
     return res
 
+
+@router.get("/cards")
+async def get_user_cards(
+    _meta=Depends(ReqMeta),
+    user=Depends(get_current_user)
+):
+    """
+    获取登录用户的卡片列表
+    :param _meta:
+    :param user:
+    :return:
+    """
+    uid = user.id
+    offset = _meta.page * _meta.page_size
+    limit = _meta.page_size
+
+    cards = await FlashCard.find({"creator": uid}).sort([('updated_at', -1)])
+    return cards[offset:offset+limit]
