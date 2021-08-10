@@ -52,7 +52,7 @@ async def wx_register(req: WxRegisterReq):
 
 @router.post("/cards")
 async def get_user_cards(
-    _meta=Depends(ReqMeta),
+    _meta: ReqMeta,
     user=Depends(get_current_user)
 ):
     """

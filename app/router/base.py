@@ -8,8 +8,5 @@ class ReqMeta(BaseModel):
 
     """
 
-    class Meta(BaseModel):
-        page: Optional[int] = Field(0)
-        page_size: Optional[int] = Field(10)
-
-    _meta: Meta
+    page: Optional[int] = Field(0)
+    page_size: Optional[int] = Field(10)
