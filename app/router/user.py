@@ -65,5 +65,5 @@ async def get_user_cards(
     offset = _meta.page * _meta.page_size
     limit = _meta.page_size
 
-    cards = await FlashCard.find({"creator": uid}).sort([('updated_at', -1)])
+    cards = await FlashCard.find({"creator": uid})
     return cards[offset:offset+limit]
