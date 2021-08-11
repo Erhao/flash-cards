@@ -92,16 +92,17 @@ async def upsert(
         user=Depends(get_current_user)
 ):
     print('------------user', user)
+    doc = dict()
+    if req.front_text:
+        doc['front_content'] = req.front_text
+    if req.back_text:
+        doc['back_content'] = req.back_text
     # 创建
     if not req.id:
-        docs = dict()
-        docs['creator'] = user.id
-        if req.front_text:
-            docs['front_content'] = req.front_text
-        if req.back_text:
-            docs['back_content'] = req.back_text
-        res = await flashcard_serv.create(docs)
+        doc['creator'] = user.id
+        res = await flashcard_serv.create(doc)
     # 更新
     else:
-        pass
+        record: FlashCard = await FlashCard.get_from_oid(req.id)
+        res = await record.update(doc)
     return res

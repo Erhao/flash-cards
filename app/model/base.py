@@ -1,6 +1,7 @@
 from odmantic import ObjectId
 from typing import Dict
 from odmantic import Model
+from datetime import datetime
 
 from app.db.mongodb import get_aio_engine
 
@@ -42,4 +43,6 @@ class BaseMongoModel(Model):
     async def update(self, doc: Dict):
         for key, val in doc.items():
             setattr(self, key, val)
+        if self.updated_at:
+            self.updated_at = datetime.utcnow()
         return await self.save()
