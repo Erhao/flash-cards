@@ -31,7 +31,7 @@ class User(Model, BaseMongoModel):
     class Config:
         collection = "user"
 
-    def create_welcome_cards(self):
+    async def create_welcome_cards(self):
         """
         新用户注册时自动创建介绍性卡片. 灵感卡 知识卡 倒计时卡 纪念卡
         :return:
