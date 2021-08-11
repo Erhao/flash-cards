@@ -12,12 +12,17 @@ class UserServ:
         :param openid:
         :return:
         """
-        user = await User.find_one({"openid": openid})
-        if user:
-            return user
+        record = await User.find_one({"openid": openid})
+        if record:
+            return record
 
-        user = User(openid=openid)
-        return await user.save()
+        record = User(openid=openid)
+        user = await record.save()
+
+        # 给新用户创建四个介绍性卡片
+        await user.create_welcome_cards()
+
+        return user
 
 
 user_serv = UserServ()
