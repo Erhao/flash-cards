@@ -56,7 +56,7 @@ class User(Model, BaseMongoModel):
         }
         commemorate_card = {
             "front_content": "结婚纪念日\n工作后第一次发工资的日子\n甚至是阿猫阿狗的生日",
-            "back_content": "让'纪念卡'记着, 是因为心里有",
+            "back_content": "让`纪念卡`记着, 是因为心里有",
             "type": FLASH_CARD_COMMEMORATE,
             "creator": self.id,
         }
